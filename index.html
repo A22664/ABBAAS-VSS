@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>مجرة الذكريات</title>
+    
+    <script src="https://unpkg.com/three@0.128.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <audio id="space-audio" loop></audio>
+
+    <div id="ui-container">
+        <div class="glass-card">
+            <h2>✨ مَهَمّة الذكريات ✨</h2>
+            
+            <div class="section-title">💖 1. عبارة البداية المنيرة</div>
+            <input type="text" id="startPhrase" placeholder="مثال: رحلتنا بدأت هنا...">
+
+            <div class="section-title">🌌 2. الوجهة الفضائية</div>
+            <select id="planetChoice">
+                <option value="earth">الكرة الأرضية 🌍</option>
+                <option value="mars">كوكب المريخ 🔴</option>
+                <option value="moon">القمر 🌑</option>
+            </select>
+
+            <div class="section-title">💌 3. أضف رسائلك</div>
+            <textarea id="userText" placeholder="اكتب رسائلك هنا... (اضغط Enter لفصل الجمل)"></textarea>
+            
+            <div class="upload-group">
+                <label class="custom-btn">
+                    <span id="file-count">📸 رفع الصور</span>
+                    <input type="file" id="userImages" accept="image/*" multiple style="display:none;">
+                </label>
+                <label class="custom-btn">
+                    <span id="music-count">🎵 موسيقى</span>
+                    <input type="file" id="userMusic" accept="audio/*" style="display:none;">
+                </label>
+            </div>
+
+            <button class="launch-btn" id="startBtn">بدء الرحلة 🚀</button>
+        </div>
+    </div>
+
+    <div id="warp-overlay"></div>
+    
+    <div id="welcome-overlay">
+        <h1 id="welcome-text"></h1>
+    </div>
+
+    <div id="instruction-hint">اسحب للدوران، واضغط نقرة سريعة للتعمق 🔍</div>
+    
+    <div class="floating-controls" id="floating-controls">
+        <button class="icon-btn" id="music-toggle" title="تشغيل/إيقاف الموسيقى">🎵</button>
+        <button class="icon-btn" id="qrBtn" title="شارك هذه المجرة">🔗 شارك كباركود</button>
+    </div>
+
+    <div id="qr-modal">
+        <h3 style="color: white; margin-bottom: 10px; text-shadow: 0 0 10px #ff69b4;">دعهم يعيشون التجربة</h3>
+        <p style="color: #ff9a9e; font-size: 13px; text-align: center; margin-bottom: 15px;">امسح الباركود أو انسخ الرابط</p>
+        
+        <div class="qr-box" id="qrcode-container"></div>
+        
+        <div style="width: 80%; max-width: 300px; margin-bottom: 20px;">
+            <input type="text" id="shareUrlInput" readonly style="width: 100%; padding: 10px; border-radius: 10px; text-align: left; direction: ltr; font-size: 12px; background: rgba(0,0,0,0.5); color: #00d2ff; border: 1px solid #ff69b4; margin-bottom: 10px;">
+            <button onclick="copyShareLink()" style="width: 100%; padding: 10px; border-radius: 10px; background: #ff69b4; color: white; border: none; font-weight: bold; cursor: pointer;">📋 نسخ الرابط</button>
+        </div>
+
+        <button class="close-btn" onclick="document.getElementById('qr-modal').style.display='none'">إغلاق</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
